@@ -1,0 +1,18 @@
+{{/*
+    use: 
+        {{ <mermaid>}} mermaid code {{ </mermaid>}}
+        {{ <mermaid theme="dark">}} mermaid code {{ </mermaid>}}
+    optional params: 
+        theme: a selection among the builtin mermaid themes
+        custom-init: customize the init line provided by the mermaid library
+*/}}
+<div class="mermaid">
+    {{ if .Get "theme" }}
+    %%{init: {'theme': '{{.Get "theme"}}'}}%%
+    {{ else if .Get "custom-init" }}
+    %%{{.Get "custom-init"}}%%
+    {{ else }}
+    %%{init: {'theme': 'dark' }}%%
+    {{ end }}
+    {{.Inner}}
+</div>
